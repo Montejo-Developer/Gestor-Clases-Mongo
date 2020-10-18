@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-feb-2018 15:41:14 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="examenmarzo.Examen" table="examen" schema="public" optimistic-lock="version">
+        <id name="clave" type="int">
+            <column name="clave" />
+            <generator class="assigned" />
+        </id>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" />
+        </property>
+        <property name="asignatura" type="string">
+            <column name="asignatura" length="20" />
+        </property>
+        <property name="texto" type="string">
+            <column name="texto" />
+        </property>
+        <set name="notas" table="nota" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codexamen" not-null="true" />
+            </key>
+            <one-to-many class="examenmarzo.Nota" />
+        </set>
+    </class>
+</hibernate-mapping>

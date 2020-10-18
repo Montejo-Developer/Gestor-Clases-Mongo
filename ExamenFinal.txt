@@ -1,0 +1,26 @@
+CREATE TABLE examen (
+    clave INTEGER PRIMARY KEY,
+    fecha DATE,
+    asignatura VARCHAR (20),
+    texto TEXT
+    
+)
+
+CREATE TABLE alumno (
+	clave INTEGER PRIMARY KEY,
+    nombre VARCHAR (20),
+    apellidos VARCHAR (20)    
+)
+
+CREATE DOMAIN valor AS NUMERIC(4,2)
+CHECK (VALUE >= 0 AND VALUE <= 10);
+
+CREATE TABLE nota (
+	nota VALOR,
+    codAlumno INTEGER REFERENCES alumno (clave),
+    codExamen INTEGER REFERENCES examen (clave)
+)
+
+ALTER TABLE nota
+ADD CONSTRAINT cp_tabla PRIMARY KEY(nota, codAlumno, codExamen);
+
